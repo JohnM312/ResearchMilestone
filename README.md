@@ -1,8 +1,30 @@
-# Movie Night Mixer — PySide6 Research Milestone
+# Movie Night Mixer Research Milestone
 
-**Movie Night Mixer** is a themed desktop app made with **Python** and **PySide6**. The user chooses a genre, mood, group size, and available time. The app generates a fictional movie-night recommendation with a snack and atmosphere tip, and can save favorite combinations locally.
+An individual, interactive PySide6 desktop prototype for **Movie Night Mixer**. It demonstrates the chosen desktop framework and Python package manager without requiring a movie-streaming account, internet connection, external API, database server, or real movie catalog.
 
-## Run it on Windows
+## What it does
+
+1. Lets the user choose a movie genre: Adventure, Comedy, Mystery, or Sci-Fi.
+2. Lets the user choose a mood, group size, and available runtime.
+3. Generates a fictional movie-night recommendation based on those choices.
+4. Pairs the recommendation with a snack and an atmosphere tip.
+5. Lets the user save favorite movie-night combinations to a local table.
+
+The app uses a small in-program collection of fictional titles and randomly selects a compatible option. This is intentional: it makes the prototype easy to test and demonstrates user input, events, UI updates, styling, and local data storage without relying on an external movie API.
+
+## Technologies researched
+
+| **Technology** | **Role** | **Why it fits Movie Night Mixer** |
+| --- | --- | --- |
+| Python | Application logic and local data handling | Accessible, readable, and includes useful built-in tools such as `random`, `json`, and `dataclasses`. |
+| PySide6 | Desktop UI framework | Supports a polished local desktop app with drop-downs, buttons, styled cards, and tables. |
+| pip + venv | Package/environment manager | Installs PySide6 in an isolated environment so another developer can reproduce the project setup. |
+| JSON | Local prototype storage | Saves favorite movie-night ideas without adding a database or cloud service. |
+| TMDb or OMDb (future evaluation) | Possible real movie-data API | Could provide real titles, posters, ratings, and streaming details in a future version, but is not needed for this milestone prototype. |
+
+## Run it
+
+Install Python once, then run these commands from the project folder in VS Code's terminal or PowerShell:
 
 ```powershell
 py -m venv .venv
@@ -12,48 +34,19 @@ py -m pip install -r requirements.txt
 py main.py
 ```
 
-If PowerShell blocks activation, use `\.venv\Scripts\activate.bat` in Command Prompt instead.
+If PowerShell blocks the activation command, open Command Prompt in the project folder and run:
 
-## Research notes
+```bat
+py -m venv .venv
+.venv\Scripts\activate.bat
+py -m pip install -r requirements.txt
+py main.py
+```
 
-PySide6 is a Python binding for Qt 6 and can run the same Qt Widgets application on Windows, macOS, and Linux. Qt Quick/QML is an alternative better suited to highly animated or touch-first interfaces; Qt Widgets was chosen here for its strong controls, layouts, tables, and desktop UI support.
+The first command creates an isolated environment. The install command reads `requirements.txt` and installs PySide6. The final command opens Movie Night Mixer.
 
-| Technology | Strength | Trade-off |
-| --- | --- | --- |
-| PySide6 | Polished, cross-platform desktop UI and Qt tools | Larger installation; Qt licensing matters |
-| Tkinter | Included with many Python installs | Less styling flexibility |
-| Kivy | Touch/mobile apps | Less conventional desktop controls |
-| React/Django web app | Browser access | Server/browser deployment required |
+## Project scope
 
-### Libraries and concepts
+This milestone prototype deliberately excludes real movie titles, streaming integrations, user accounts, cloud services, online APIs, sharing between users, and a full database. Saved favorites remain in a local `movie_night_favorites.json` file on the user's computer.
 
-- `PySide6.QtWidgets`: window, input controls, result card, buttons, and table.
-- `PySide6.QtCore.Qt`: UI alignment constants.
-- `PySide6.QtGui.QFont`: app-wide font.
-- Built-in `random`, `json`, and `dataclasses`: variety, local persistence, and a clear data model.
-- Signals and slots connect the buttons to `generate_night` and `save_current`.
-- Qt style sheets give the interface a custom dark, cinema-inspired visual design.
-
-### Package manager: pip
-
-`pip` installs packages into the active `.venv` virtual environment. The `requirements.txt` file lets a teammate reproduce the installation with `py -m pip install -r requirements.txt`. Useful commands are `py -m pip list`, `py -m pip show PySide6`, and `py -m pip freeze > requirements-lock.txt`.
-
-### Deployment and limitations
-
-PySide6 wheels include Qt binaries, so a separate Qt installation is not required for this project. For distribution to users without Python, `pyside6-deploy` can bundle an executable using Nuitka; test the package on each operating system. This sample intentionally uses fictional titles and local JSON. A future version could use a real movie API, posters, ratings, and a database.
-
-## Video demo
-
-Run `py main.py`, set the four options, click **Mix My Night**, explain the result card, save a favorite, and restart the app to show that the saved table persists.
-
-## GitHub checklist
-
-- [ ] Push this project to your personal repository with multiple meaningful commits.
-- [ ] Record/upload the demo video.
-- [ ] Create `Research Milestone: <yourusername>` in the team repository.
-- [ ] Add the repository and video links, then mention `@instructors` and required TAs.
-
-## Sources
-
-- [Qt for Python: Getting Started](https://doc.qt.io/qtforpython-6/gettingstarted.html)
-- [Qt for Python: Deployment](https://doc.qt.io/qtforpython-6/deployment/index.html)
+The shared capstone application could later expand these same UI patterns into real movie searches, filters, poster artwork, friend/group recommendations, watch-list sharing, ratings, and database-backed accounts.
