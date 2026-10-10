@@ -1,0 +1,13 @@
+# Python environments and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# App data created while running the sample
+tasks.json
+movie_night_favorites.json
+
+# Build output
+*.dist/
+build/
+dist/
